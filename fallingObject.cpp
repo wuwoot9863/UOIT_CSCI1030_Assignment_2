@@ -9,14 +9,40 @@ fallingObject::fallingObject(float mass, float surfaceArea, float bungeeSpringCo
 	this->bungeeUnstretchedLength = bungeeUnstretchedLength;
 }
 
+
+float fallingObject::getMass(){
+	return mass;
+}
+
+float fallingObject::getSurfaceArea(){
+	return surfaceArea;
+}
+
+float fallingObject::getBungeeSpringConstant(){
+	return bungeeSpringConstant;
+}
+
+float fallingObject::getBungeeUnstretchedLength(){
+	return bungeeUnstretchedLength;
+}
+
+float fallingObject::getFallDistance(){
+	return fallDistance;
+}
+
+float fallingObject::getVelocity(){
+	return velocity;
+}
+
+float fallingObject::getAcceleration(){
+	return acceleration;
+}
+
+
 void fallingObject::simulateTimeStep(float deltaT){
 	this->deltaT = deltaT;
-	float g = 9.81f;
 
-	float Ffriction, Fspring, Fweight, Ftotal;
-	float deltaV, deltaD;
-
-	Ffriction = -0.65*surfaceArea*velocity*abs(velocity);
+	Ffriction = -0.65f*surfaceArea*velocity*abs(velocity);
 	Fweight = mass * g;
 
 	if (fallDistance < bungeeUnstretchedLength){
@@ -32,7 +58,4 @@ void fallingObject::simulateTimeStep(float deltaT){
 
 	deltaD = velocity * deltaT;
 	fallDistance += deltaD;
-
-	Ftotal = Ffriction + Fspring + Fweight;
-	acceleration = Ftotal / mass;
 }
